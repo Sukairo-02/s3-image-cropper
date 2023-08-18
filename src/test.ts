@@ -1,6 +1,7 @@
 import fs from 'fs'
 
 import crop from './crop'
+import bufferType from './bufferType'
 
 const start = async () => {
 	try {
@@ -13,4 +14,17 @@ const start = async () => {
 	}
 }
 
+const bufferTest = async () => {
+	try {
+		const input = fs.readFileSync('input.png')
+
+		const result = await bufferType(input)
+
+		await fs.writeFileSync('bufferType.webp', result)
+	} catch (e) {
+		console.error(e)
+	}
+}
+
 start()
+bufferTest()
