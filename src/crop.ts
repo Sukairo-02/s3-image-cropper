@@ -14,8 +14,13 @@ export default (inStream: Readable, outStream: Writable, dimensions = defaultDim
 	if (dimensions.width <= 0 || dimensions.height <= 0)
 		throw new Error('Image Cropper Error: invalid dimensions - height and width must be greater than zero')
 
+	const flooredDimensions = {
+		width: Math.floor(dimensions.width),
+		height: Math.floor(dimensions.height)
+	}
+
 	const cropperPipeline = sharp()
-	cropperPipeline.resize(dimensions).toFormat('webp').pipe(outStream)
+	cropperPipeline.resize(flooredDimensions).toFormat('webp').pipe(outStream)
 
 	inStream.pipe(cropperPipeline)
 

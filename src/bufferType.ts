@@ -9,8 +9,8 @@ export default async (
 ) => {
 	let width, height
 	if (config) {
-		width = config.width
-		height = config.height
+		width = Math.floor(config.width)
+		height = Math.floor(config.height)
 	} else {
 		const defaultSize = 500
 
